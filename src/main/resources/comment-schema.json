@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://example.com/example.json",
+  "type": "object",
+  "title": "Comment Schema",
+  "required": [
+    "storyId",
+    "uuid",
+    "type",
+    "version",
+    "message",
+    "time",
+    "user"
+  ],
+  "properties": {
+    "storyId": {
+      "type": "string"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "description": "ERD design version"
+    },
+    "message": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "isSend": {
+      "type": "string"
+    },
+    "time": {
+      "type": "unixtime"
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "user.uuid"
+        },
+        "name": {
+          "type": "string",
+          "description": "user.name"
+        },
+        "ip": {
+          "type": "string",
+          "description": "user.ip"
+        },
+        "agent": {
+          "type": "string",
+          "description": "user.agent"
+        }
+      },
+      "required": [
+        "uuid",
+        "name"
+      ]
+    }
+  },
+  "examples": [{
+    "storyId": "12345",
+    "uuid": "12345678-1234-5678-1234-567812345678",
+    "type": "string",
+    "version": "0.1",
+    "message": "RIP",
+    "image": "image_title..?",
+    "isSend": "Y",
+    "time": "1692603528",
+    "user": {
+      "uuid": "12345678-1234-5678-1234-567812345678",
+      "name": "Sam",
+      "ip": "127.0.0.1",
+      "agent": "Chrome/71.0"
+    }
+  }]
+}
