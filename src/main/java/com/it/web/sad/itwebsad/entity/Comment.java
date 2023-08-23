@@ -1,17 +1,18 @@
 package com.it.web.sad.itwebsad.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Document(collection = "comments")
-public class CommentEntity {
+public class Comment {
 
+    @Schema(description = "commentId")
     @NotNull
     private String id;
 
@@ -35,6 +36,6 @@ public class CommentEntity {
     private String time;
 
     @NotNull
-    private UserEntity user;
+    private User user;
 
 }

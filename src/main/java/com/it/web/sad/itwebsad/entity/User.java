@@ -1,5 +1,6 @@
 package com.it.web.sad.itwebsad.entity;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class UserEntity {
+@Hidden
+public class User {
 
     @NotNull
     private String uuid;

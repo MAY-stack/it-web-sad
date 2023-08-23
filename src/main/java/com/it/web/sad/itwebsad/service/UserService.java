@@ -1,17 +1,17 @@
 package com.it.web.sad.itwebsad.service;
 
-import com.it.web.sad.itwebsad.entity.UserEntity;
+import com.it.web.sad.itwebsad.entity.User;
 
 import java.util.List;
 
 public interface UserService {
 
-    public List<UserEntity> getUser();
+    public List<User> getUser();
 
-    public UserEntity addUser(UserEntity userEntity);
+    public User addUser(User user);
 
-    public UserEntity deleteUser(String uuid);
+    public User deleteUser(String uuid);
 
-    public  UserEntity updateUser(String uuid, UserEntity userEntity);
+    public User updateUser(String uuid, User user);
 
 }

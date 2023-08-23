@@ -1,6 +1,6 @@
 package com.it.web.sad.itwebsad.service.Impl;
 
-import com.it.web.sad.itwebsad.entity.CommentEntity;
+import com.it.web.sad.itwebsad.entity.Comment;
 import com.it.web.sad.itwebsad.repository.CommentRepository;
 import com.it.web.sad.itwebsad.service.CommentService;
 import org.springframework.stereotype.Repository;
@@ -21,33 +21,33 @@ public class CommentServiceImpl implements CommentService {
 
     /* all */
     @Override
-    public List<CommentEntity> getComments() {
+    public List<Comment> getComments() {
         return commentRepository.findAll();
     }
 
     /* post comment */
     @Override
-    public CommentEntity addComment(CommentEntity commentEntity) {
-        return commentRepository.save(commentEntity);
+    public Comment addComment(Comment comment) {
+        return commentRepository.save(comment);
     }
 
     /* get by id */
     @Override
-    public Optional<CommentEntity> getCommentById(String id){
+    public Optional<Comment> getCommentById(String id){
         return commentRepository.findById(id);
     }
 
     /* update */
     @Override
-    public void updateComment(String id, CommentEntity commentEntity) {
+    public void updateComment(String id, Comment comment) {
         if(commentRepository.findById(id).isPresent()){
-           CommentEntity targetComment = commentRepository.findById(id).get();
-           targetComment.setMessage(commentEntity.getMessage());
-           targetComment.setImage(commentEntity.getImage());
-           targetComment.setType(commentEntity.getType());
-           targetComment.setTime(commentEntity.getTime());
-           targetComment.setUser(commentEntity.getUser());
-           targetComment.setIsSend(commentEntity.getIsSend());
+           Comment targetComment = commentRepository.findById(id).get();
+           targetComment.setMessage(comment.getMessage());
+           targetComment.setImage(comment.getImage());
+           targetComment.setType(comment.getType());
+           targetComment.setTime(comment.getTime());
+           targetComment.setUser(comment.getUser());
+           targetComment.setIsSend(comment.getIsSend());
 
            commentRepository.save(targetComment);
 
@@ -58,14 +58,14 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void deleteComment(String id) {
         if(commentRepository.findById(id).isPresent()){
-            CommentEntity targetComment = commentRepository.findById(id).get();
+            Comment targetComment = commentRepository.findById(id).get();
             commentRepository.delete(targetComment);
         }
     }
 
     /* get by storyId */
     @Override
-    public List<CommentEntity> getCommentsByStoryId(String storyId){
+    public List<Comment> getCommentsByStoryId(String storyId){
         return commentRepository.findAllByStoryId(storyId);
     }
 

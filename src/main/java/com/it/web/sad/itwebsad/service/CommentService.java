@@ -1,6 +1,6 @@
 package com.it.web.sad.itwebsad.service;
 
-import com.it.web.sad.itwebsad.entity.CommentEntity;
+import com.it.web.sad.itwebsad.entity.Comment;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,21 +8,21 @@ import java.util.Optional;
 public interface CommentService {
 
     /* all */
-    public List<CommentEntity> getComments();
+    public List<Comment> getComments();
 
     /* post comment */
-    public CommentEntity addComment(CommentEntity commentEntity);
+    public Comment addComment(Comment comment);
 
     /* get by id */
-    public Optional<CommentEntity> getCommentById(String id);
+    public Optional<Comment> getCommentById(String id);
 
     /* update */
-    public void updateComment(String id, CommentEntity commentEntity);
+    public void updateComment(String id, Comment comment);
 
     /* delete */
     public void deleteComment(String id);
 
     /* get by storyId */
-    List<CommentEntity> getCommentsByStoryId(String storyId);
+    List<Comment> getCommentsByStoryId(String storyId);
 
 }

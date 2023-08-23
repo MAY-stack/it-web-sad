@@ -1,12 +1,12 @@
 package com.it.web.sad.itwebsad.repository;
 
 
-import com.it.web.sad.itwebsad.entity.CommentEntity;
+import com.it.web.sad.itwebsad.entity.Comment;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface CommentRepository extends MongoRepository<CommentEntity, String> {
+public interface CommentRepository extends MongoRepository<Comment, String> {
 
-    List<CommentEntity> findAllByStoryId(String storyId);
+    List<Comment> findAllByStoryId(String storyId);
 }
