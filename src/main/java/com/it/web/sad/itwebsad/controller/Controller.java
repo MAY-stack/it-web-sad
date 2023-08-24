@@ -109,7 +109,7 @@ public class Controller {
 
     public boolean commentValidator(CommentDTO commentDTO) throws Exception {
 
-        String schema = new String(Files.readAllBytes(Paths.get("D:\\Dropbox\\MySource\\SpringBoot\\it-web-sad\\src\\main\\resources\\comment-schema.json")));
+        String schema = new String(Files.readAllBytes(Paths.get("src/main/resources/comment-schema.json")));
 
         ObjectMapper objectMapper = new ObjectMapper();
         String instance = objectMapper.writeValueAsString(commentDTO);
