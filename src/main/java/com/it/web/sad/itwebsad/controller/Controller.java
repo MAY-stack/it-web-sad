@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.it.web.sad.itwebsad.dto.CommentDTO;
 import com.it.web.sad.itwebsad.service.CommentService;
 import dev.harrel.jsonschema.ValidatorFactory;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,11 +31,16 @@ public class Controller {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @GetMapping("/comments")
+    @Operation(summary = "get all comments list ", responses = {
+            @ApiResponse(responseCode = "200", description = "성공")})
     public List<CommentDTO> getComments() throws Exception{
         return commentService.getComments();
     }
 
     @PostMapping("/comments")
+    @Operation(summary = "add comment ", responses = {
+            @ApiResponse(responseCode = "201", description = "created"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")})
     public ResponseEntity<CommentDTO> postComment(@Valid @RequestBody CommentDTO commentDTO) throws Exception {
         CommentDTO savedComment = commentService.addComment(commentDTO);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -44,6 +51,9 @@ public class Controller {
     }
 
     @GetMapping("/comment/{commentId}")
+    @Operation(summary = "get comment by comment Id", responses = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "204", description = "No Content")})
     public ResponseEntity<CommentDTO> getCommentById(@PathVariable("commentId") String id) throws Exception {
         if(commentValidator(commentService.getCommentById(id))){
             return ResponseEntity.ok(commentService.getCommentById(id));
@@ -51,19 +61,37 @@ public class Controller {
     }
 
     @PutMapping("/comment/{commentId}")
-    public ResponseEntity<CommentDTO> updateComment(@Valid @PathVariable String commentId, @RequestBody CommentDTO commentDTO) throws Exception {
-        commentService.updateComment(commentId, commentDTO);
+    @Operation(summary = "update comment by comment Id", responses = {
+            @ApiResponse(responseCode = "201", description = "accepted"),
+            @ApiResponse(responseCode = "204", description = "No Content"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")})
+    public ResponseEntity<CommentDTO> updateComment(@PathVariable("commentId") String id, @Valid @RequestBody CommentDTO commentDTO) throws Exception {
+        commentService.updateComment(id, commentDTO);
+        if(commentValidator(commentService.getCommentById(id))){
+            return ResponseEntity.accepted().build();
+        }
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/comment/{commentId}")
-    public ResponseEntity<CommentDTO> delete(@PathVariable String commentId) throws Exception {
-        commentService.deleteComment(commentId);
+    @Operation(summary = "delete comment by comment Id", responses = {
+            @ApiResponse(responseCode = "201", description = "accepted"),
+            @ApiResponse(responseCode = "204", description = "No Content")})
+    public ResponseEntity<CommentDTO> delete(@PathVariable("commentId") String id) throws Exception {
+
+        if(commentValidator(commentService.getCommentById(id))){
+            commentService.deleteComment(id);
+            return ResponseEntity.accepted().build();
+        }
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/comments/{storyId}")
+    @Operation(summary = "get comment by storyId", responses = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "204", description = "No Content")})
     public List<CommentDTO> getCommentsByStoryId(@PathVariable String storyId) throws Exception {
+
         return commentService.getCommentsByStoryId(storyId);
     }
 
