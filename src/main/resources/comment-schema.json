@@ -44,9 +44,7 @@
       },
       "required": [
         "uuid",
-        "name",
-        "ip",
-        "agent"
+        "name"
       ]
     }
   },
@@ -56,8 +54,6 @@
     "type",
     "version",
     "message",
-    "image",
-    "isSend",
     "time",
     "user"
   ]
