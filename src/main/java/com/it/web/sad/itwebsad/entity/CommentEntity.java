@@ -2,16 +2,17 @@ package com.it.web.sad.itwebsad.entity;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 @Document(collection = "comments")
 public class CommentEntity {
-
     @NotNull
     private String id;
 

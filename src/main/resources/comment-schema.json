@@ -1,11 +1,9 @@
 {
-  "$schema": "https://json-schema.org/draft/2019-09/schema",
-  "$id": "https://example.com/example.json",
   "type": "object",
   "title": "Comment Schema",
   "required": [
+    "id",
     "storyId",
-    "uuid",
     "type",
     "version",
     "message",
@@ -13,10 +11,11 @@
     "user"
   ],
   "properties": {
-    "storyId": {
-      "type": "string"
+    "id": {
+      "type": "string",
+      "description": "comment id"
     },
-    "uuid": {
+    "storyId": {
       "type": "string"
     },
     "type": {
