@@ -1,8 +1,10 @@
 package com.it.web.sad.itwebsad.controller;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.it.web.sad.itwebsad.dto.CommentDTO;
 import com.it.web.sad.itwebsad.service.CommentService;
+import dev.harrel.jsonschema.ValidatorFactory;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,13 +40,14 @@ public class Controller {
                         .path("/{id}")
                                 .buildAndExpand(savedComment.getId())
                                         .toUri();
-
         return ResponseEntity.created(location).build();
     }
 
     @GetMapping("/comment/{commentId}")
-    public CommentDTO getCommentById(@PathVariable String commentId) throws Exception {
-        return commentService.getCommentById(commentId);
+    public ResponseEntity<CommentDTO> getCommentById(@PathVariable("commentId") String id) throws Exception {
+        if(commentValidator(commentService.getCommentById(id))){
+            return ResponseEntity.ok(commentService.getCommentById(id));
+        } else return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/comment/{commentId}")
@@ -70,9 +75,19 @@ public class Controller {
         Map<String,String> map = new HashMap<>();
         map.put("error type", httpStatus.getReasonPhrase());
         map.put("code", "400");
-        map.put("message", "에러발생");
 
         return new ResponseEntity<>(map, responseHeaders, httpStatus);
     }
 
+    public boolean commentValidator(CommentDTO commentDTO) throws Exception {
+
+        String schema = new String(Files.readAllBytes(Paths.get("D:\\Dropbox\\MySource\\SpringBoot\\it-web-sad\\src\\main\\resources\\comment-schema.json")));
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String instance = objectMapper.writeValueAsString(commentDTO);
+
+        boolean valid = new ValidatorFactory().validate(schema, instance).isValid();
+        logger.info(String.valueOf(valid));
+        return valid;
+    }
 }

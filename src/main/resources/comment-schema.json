@@ -1,19 +1,9 @@
 {
+  "title": "Generated schema for Root",
   "type": "object",
-  "title": "Comment Schema",
-  "required": [
-    "id",
-    "storyId",
-    "type",
-    "version",
-    "message",
-    "time",
-    "user"
-  ],
   "properties": {
     "id": {
-      "type": "string",
-      "description": "comment id"
+      "type": "string"
     },
     "storyId": {
       "type": "string"
@@ -22,8 +12,7 @@
       "type": "string"
     },
     "version": {
-      "type": "string",
-      "description": "ERD design version"
+      "type": "string"
     },
     "message": {
       "type": "string"
@@ -35,48 +24,41 @@
       "type": "string"
     },
     "time": {
-      "type": "unixtime"
+      "type": "string"
     },
     "user": {
       "type": "object",
       "properties": {
         "uuid": {
-          "type": "string",
-          "description": "user.uuid"
+          "type": "string"
         },
         "name": {
-          "type": "string",
-          "description": "user.name"
+          "type": "string"
         },
         "ip": {
-          "type": "string",
-          "description": "user.ip"
+          "type": "string"
         },
         "agent": {
-          "type": "string",
-          "description": "user.agent"
+          "type": "string"
         }
       },
       "required": [
         "uuid",
-        "name"
+        "name",
+        "ip",
+        "agent"
       ]
     }
   },
-  "examples": [{
-    "storyId": "12345",
-    "uuid": "12345678-1234-5678-1234-567812345678",
-    "type": "string",
-    "version": "0.1",
-    "message": "RIP",
-    "image": "image_title..?",
-    "isSend": "Y",
-    "time": "1692603528",
-    "user": {
-      "uuid": "12345678-1234-5678-1234-567812345678",
-      "name": "Sam",
-      "ip": "127.0.0.1",
-      "agent": "Chrome/71.0"
-    }
-  }]
+  "required": [
+    "id",
+    "storyId",
+    "type",
+    "version",
+    "message",
+    "image",
+    "isSend",
+    "time",
+    "user"
+  ]
 }
