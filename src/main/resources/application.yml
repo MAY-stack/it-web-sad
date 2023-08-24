@@ -1,0 +1,6 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://dbmaster:dWmf0RyTfbMt72D5@cluster-0.60arfkd.mongodb.net/?retryWrites=true&w=majority
+      database: it-web-sad-db
+      authentication-database: admin
